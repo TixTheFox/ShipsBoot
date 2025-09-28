@@ -1,6 +1,8 @@
 package com.tixthefox.service;
 
 import com.tixthefox.DAO.ShipDAO;
+import com.tixthefox.DTO.ShipFiltersRequestDTO;
+import com.tixthefox.DTO.ShipFiltersWithPaginationDTO;
 import com.tixthefox.DTO.ShipRequestDTO;
 import com.tixthefox.DTO.ShipResponseDTO;
 import com.tixthefox.exceptions.InvalidIdException;
@@ -29,14 +31,14 @@ public class ShipServiceImpl implements ShipService {
   }
 
   @Override
-  public List<ShipResponseDTO> findAll(Map<String, String> requestParams) {
-    List<Ship> shipsAsEntities = shipDAO.findAll(requestParams);
+  public List<ShipResponseDTO> findAll(ShipFiltersWithPaginationDTO shipFilters) {
+    List<Ship> shipsAsEntities = shipDAO.findAll(shipFilters);
     return shipsAsEntities.stream().map(ShipEntityDTOConverter::toResponseDTO).toList();
   }
 
   @Override
-  public Integer count(Map<String, String> requestParams) {
-    return shipDAO.count(requestParams);
+  public Long count(ShipFiltersRequestDTO shipFilters) {
+    return shipDAO.count(shipFilters);
   }
 
   @Override

@@ -80,6 +80,16 @@ public class GetAllTests {
   }
 
   @Test
+  void GetShipsListTest_unknownShipTypeParam() throws Exception {
+    ResultActions resultActions =
+            mockMvc.perform(get("/api/ships")
+                    .param("shipType", "goofy"));
+
+    resultActions
+            .andExpect(status().isBadRequest());
+  }
+
+  @Test
   void GetShipsListTest_AfterParam() throws Exception {
     ResultActions resultActions =
             mockMvc.perform(get("/api/ships")
@@ -334,6 +344,108 @@ public class GetAllTests {
     ResultActions resultActions =
             mockMvc.perform(get("/api/ships")
                     .param("after", "12lsa"));
+
+    resultActions
+            .andExpect(status().isBadRequest());
+  }
+
+  //
+  // PAGINATION
+  //
+
+  @Test
+  void GetShipsListTest_Pagination_defaultParams() throws Exception {
+    ResultActions resultActions =
+            mockMvc.perform(get("/api/ships"));
+
+    resultActions
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$", hasSize(5)));
+  }
+
+  @Test
+  void GetShipsListTest_Pagination_ValidInputs() throws Exception {
+    ResultActions resultActions =
+            mockMvc.perform(get("/api/ships")
+                    .param("pageSize", "3")
+                    .param("pageNumber", "0"));
+
+    resultActions
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$", hasSize(3)));
+
+    resultActions =
+            mockMvc.perform(get("/api/ships")
+                    .param("pageSize", "3")
+                    .param("pageNumber", "1"));
+
+    resultActions
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$", hasSize(2)));
+  }
+
+  @Test
+  void GetShipsListTest_Pagination_defaultPageNumber() throws Exception {
+    ResultActions resultActions =
+            mockMvc.perform(get("/api/ships")
+                    .param("pageSize", "3"));
+
+    resultActions
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$", hasSize(3)));
+  }
+
+  @Test
+  void GetShipsListTest_Pagination_pageSizeBiggerThanDataSize() throws Exception {
+    ResultActions resultActions =
+            mockMvc.perform(get("/api/ships")
+                    .param("pageSize", "25"));
+
+    resultActions
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$", hasSize(5)));
+  }
+
+  @Test
+  void GetShipsListTest_Pagination_pageNumberBiggerThanDataSize() throws Exception {
+    ResultActions resultActions =
+            mockMvc.perform(get("/api/ships")
+                    .param("pageNumber", "25"));
+
+    resultActions
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$", hasSize(0)));
+  }
+
+  @Test
+  void GetShipsListTest_Pagination_invalidPageNumber() throws Exception {
+    ResultActions resultActions =
+            mockMvc.perform(get("/api/ships")
+                    .param("pageNumber", "-21"));
+
+    resultActions
+            .andExpect(status().isBadRequest());
+
+    resultActions =
+            mockMvc.perform(get("/api/ships")
+                    .param("pageNumber", "2as"));
+
+    resultActions
+            .andExpect(status().isBadRequest());
+  }
+
+  @Test
+  void GetShipsListTest_Pagination_invalidPageSize() throws Exception {
+    ResultActions resultActions =
+            mockMvc.perform(get("/api/ships")
+                    .param("pageSize", "-21"));
+
+    resultActions
+            .andExpect(status().isBadRequest());
+
+    resultActions =
+            mockMvc.perform(get("/api/ships")
+                    .param("pageSize", "2as"));
 
     resultActions
             .andExpect(status().isBadRequest());

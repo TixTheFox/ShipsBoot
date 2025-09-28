@@ -1,15 +1,14 @@
 package com.tixthefox.controller;
 
+import com.tixthefox.DTO.ShipFiltersRequestDTO;
+import com.tixthefox.DTO.ShipFiltersWithPaginationDTO;
 import com.tixthefox.DTO.ShipRequestDTO;
 import com.tixthefox.DTO.ShipResponseDTO;
-import com.tixthefox.entity.Ship;
 import com.tixthefox.service.ShipService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -22,13 +21,13 @@ public class ShipRestController {
   }
 
   @GetMapping("/ships")
-  public List<ShipResponseDTO> getAllShips(@RequestParam Map<String, String> requestParams) {
-    return shipService.findAll(requestParams);
+  public List<ShipResponseDTO> getAllShips(ShipFiltersWithPaginationDTO shipFilters) {
+    return shipService.findAll(shipFilters);
   }
 
   @GetMapping("/ships/count")
-  public Integer getShipsCount(@RequestParam Map<String, String> requestParams) {
-    return shipService.count(requestParams);
+  public Long getShipsCount(ShipFiltersRequestDTO shipFilters) {
+    return shipService.count(shipFilters);
   }
 
   @GetMapping("/ships/{id}")

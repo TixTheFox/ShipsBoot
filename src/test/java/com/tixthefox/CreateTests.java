@@ -33,7 +33,7 @@ public class CreateTests {
   private ShipDAO shipDAO;
 
   @Test
-  void CreateTest_validBody() throws Exception {
+  public void CreateTest_validBody() throws Exception {
     ResultActions resultActions = mockMvc.perform(post("/api/ships")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestHelper.NORMAL_JSON));
@@ -60,7 +60,7 @@ public class CreateTests {
   }
 
   @Test
-  void CreateTest_validBody_withId() throws Exception {
+  public void CreateTest_validBody_withId() throws Exception {
     ResultActions resultActions = mockMvc.perform(post("/api/ships")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestHelper.NORMAL_JSON_WITH_ID));
@@ -87,7 +87,7 @@ public class CreateTests {
   }
 
   @Test
-  void CreateTest_validBody_withRating() throws Exception {
+  public void CreateTest_validBody_withRating() throws Exception {
     ResultActions resultActions = mockMvc.perform(post("/api/ships")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestHelper.NORMAL_JSON_WITH_RATING));
@@ -114,7 +114,7 @@ public class CreateTests {
   }
 
   @Test
-  void CreateTest_noIsUsed() throws Exception {
+  public void CreateTest_noIsUsed() throws Exception {
     ResultActions resultActions = mockMvc.perform(post("/api/ships")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestHelper.NO_IS_USED));
@@ -141,7 +141,7 @@ public class CreateTests {
   }
 
   @Test
-  void CreateTest_IsUsedTrue() throws Exception {
+  public void CreateTest_IsUsedTrue() throws Exception {
     ResultActions resultActions = mockMvc.perform(post("/api/ships")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestHelper.IS_USED_TRUE));
@@ -168,7 +168,7 @@ public class CreateTests {
   }
 
   @Test
-  void CreateTest_emptyBody() throws Exception {
+  public void CreateTest_emptyBody() throws Exception {
     ResultActions resultActions = mockMvc.perform(post("/api/ships")
             .contentType(MediaType.APPLICATION_JSON)
             .content("{}"));
@@ -177,7 +177,7 @@ public class CreateTests {
   }
 
   @Test
-  void CreateTest_noSpeedBody() throws Exception {
+  public void CreateTest_noSpeedBody() throws Exception {
     ResultActions resultActions = mockMvc.perform(post("/api/ships")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestHelper.NO_SPEED));
@@ -186,7 +186,7 @@ public class CreateTests {
   }
 
   @Test
-  void CreateTest_emptyNameBody() throws Exception {
+  public void CreateTest_emptyNameBody() throws Exception {
     ResultActions resultActions = mockMvc.perform(post("/api/ships")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestHelper.EMPTY_NAME));
@@ -195,7 +195,7 @@ public class CreateTests {
   }
 
   @Test
-  void CreateTest_negativeProdDateBody() throws Exception {
+  public void CreateTest_negativeProdDateBody() throws Exception {
     ResultActions resultActions = mockMvc.perform(post("/api/ships")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestHelper.NEGATIVE_PROD_DATE));
@@ -204,7 +204,7 @@ public class CreateTests {
   }
 
   @Test
-  void CreateTest_tooBigProdDateBody() throws Exception {
+  public void CreateTest_tooBigProdDateBody() throws Exception {
     ResultActions resultActions = mockMvc.perform(post("/api/ships")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestHelper.TOO_BIG_PROD_DATE));
@@ -213,7 +213,7 @@ public class CreateTests {
   }
 
   @Test
-  void CreateTest_tooBigCrewSize() throws Exception {
+  public void CreateTest_tooBigCrewSize() throws Exception {
     ResultActions resultActions = mockMvc.perform(post("/api/ships")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestHelper.TOO_BIG_CREW_SIZE));
@@ -222,7 +222,7 @@ public class CreateTests {
   }
 
   @Test
-  void CreateTest_negativeCrewSize() throws Exception {
+  public void CreateTest_negativeCrewSize() throws Exception {
     ResultActions resultActions = mockMvc.perform(post("/api/ships")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestHelper.NEGATIVE_CREW_SIZE));
@@ -231,7 +231,7 @@ public class CreateTests {
   }
 
   @Test
-  void CreateTest_tooBigPlanetName() throws Exception {
+  public void CreateTest_tooBigPlanetName() throws Exception {
     ResultActions resultActions = mockMvc.perform(post("/api/ships")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestHelper.TOO_BIG_PLANET_NAME));
