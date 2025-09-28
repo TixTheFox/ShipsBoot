@@ -108,9 +108,7 @@ public class ShipDAOImpl implements ShipDAO {
 
   // использует только фильтры, не включает пагинацию
   private List<Predicate> formPredicatesFromFilters(ShipFiltersRequestDTO shipFilters, CriteriaBuilder cb, Root<Ship> root) {
-
     List<Predicate> predicates = new ArrayList<>();
-
 
     // NAME
     if (shipFilters.getName() != null) {
