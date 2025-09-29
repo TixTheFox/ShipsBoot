@@ -54,14 +54,25 @@
 Для сборки приложения использовались:
 * Java 17
 * Maven 3.9.11
-Остальные зависимости указаны в pom.xml
-Для сборки достаточно вызвать команду 
+
+Остальные зависимости указаны в pom.xml.
+
+Для сборки достаточно вызвать команду:
 ```
 mvn clean package -DskipTests
 ```
-jar-файл CosmoportBoot-1.0.jar будет собран в директорию target, откуда его можно запустить командой
+jar-файл CosmoportBoot-1.0.jar будет собран в директорию target. Для запуска приложения необходимо определить параметры 
+подключения к базе данных. Приложение по умолчанию использует PostgreSQL, для него настройки нужно указать в файле 
+target/application.properties в формате:
 ```
-java -jar target/CosmoportBoot-1.0.jar 
+spring.datasource.url=your_jdbc_url (например jdbc:postgresql://localhost/cosmoport)
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+```
+
+После этого приложение можно запустить командами
+```
+cd target && java -jar CosmoportBoot-1.0.jar 
 ```
 API будет доступен локально по адресу `localhost:8080/api/`
 
